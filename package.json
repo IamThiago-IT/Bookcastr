@@ -13,21 +13,29 @@
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
-    "expo": "~53.0.9",
+    "expo": "~53.0.27",
     "expo-audio": "^0.4.9",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
-    "react-native": "0.79.2",
+    "react-native": "0.79.6",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-reanimated": "~3.17.0",
-    "react-native-safe-area-context": "~5.4.0",
-    "react-native-screens": "~4.10.0",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-screens": "~4.11.1",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
     "typescript": "~5.8.3"
+  },
+  "overrides": {
+    "metro": "0.82.5",
+    "metro-config": "0.82.5",
+    "metro-resolver": "0.82.5",
+    "metro-runtime": "0.82.5",
+    "react-native": "0.79.6",
+    "@react-native/virtualized-lists": "0.79.6"
   },
   "private": true
 }
