@@ -9,6 +9,8 @@
 
 O **Bookcastr** é a evolução mobile do Podcastr. Mantém a ideia central — listar episódios, tocar em background, controlar fila — mas com navegação por abas, *mini-player* fixo e *bottom sheet* expansível com gestos, animações com Reanimated e áudio nativo com `expo-audio`.
 
+> 📚 **Documentação completa:** veja [`docs/README.md`](./docs/README.md) — requisitos, regras de negócio, casos de uso, UML, arquitetura e modelo de dados.
+
 ---
 
 ## ✨ Funcionalidades
@@ -29,18 +31,32 @@ O **Bookcastr** é a evolução mobile do Podcastr. Mantém a ideia central — 
 
 ---
 
+## 📚 Documentação
+
+| Doc | Descrição |
+|-----|-----------|
+| [Requisitos](./docs/01-requisitos.md) | RF/RNF, MoSCoW, rastreabilidade com milestones |
+| [Regras de Negócio](./docs/02-regras-de-negocio.md) | RN-01…18 — fila, shuffle, loop, seek, background |
+| [Casos de Uso](./docs/03-casos-de-uso.md) | 9 UCs, atores, fluxos e matriz RF↔UC |
+| [UML](./docs/04-uml.md) | Classes, sequência, estados e navegação (Mermaid) |
+| [Arquitetura](./docs/05-arquitetura.md) | ADRs, stack, pastas, fluxo Zustand→expo-audio |
+| [Modelo de Dados](./docs/06-modelo-de-dados.md) | Episode, mocks, AsyncStorage |
+| [Glossário](./docs/07-glossario.md) | Termos do domínio |
+
+---
+
 ## 🧱 Stack
 
 | Camada | Tech | Versão | Por que |
 |---|---|---|---|
-| App | Expo | ~53.0.9 | Managed workflow, EAS, CNG |
-| UI | React / RN | 19.0.0 / 0.79.2 | Base |
-| Linguagem | TypeScript | 5.8.3 | `strict: true` |
-| Áudio | `expo-audio` | ~0.4.9 | Estável SDK 53, Media3/ExoPlayer + AVFoundation, background nativo |
-| Estado | `zustand` | ^4.5.2 | Leve, sem boilerplate |
-| Navegação | React Navigation | 6.x | `native`, `bottom-tabs`, `native-stack` |
-| Gestos/Animação | `gesture-handler` 2.24 + `reanimated` 3.17 + `@gorhom/bottom-sheet` 5.2 | Nativo 60fps, sheet estilo Apple Music |
-| SafeArea/Screens | `safe-area-context` 5.4 + `screens` 4.10 | Insets e performance nativa |
+| App | Expo | `~53.0.27` | Managed workflow, EAS, CNG |
+| UI | React / RN | `19.0.0` / `0.79.6` | Base |
+| Linguagem | TypeScript | `5.8.3` | `strict: true` |
+| Áudio | `expo-audio` | `^0.4.9` | Estável SDK 53, Media3/ExoPlayer + AVFoundation, background nativo |
+| Estado | `zustand` | `^4.5.2` | Leve, sem boilerplate |
+| Navegação | React Navigation | `6.x` | `native`, `bottom-tabs`, `native-stack` |
+| Gestos/Animação | `gesture-handler` `~2.24` + `reanimated` `~3.17` + `@gorhom/bottom-sheet` `^5.2` | Nativo 60fps, sheet estilo Apple Music |
+| SafeArea/Screens | `safe-area-context` `5.4.0` + `screens` `~4.11.1` | Insets e performance nativa |
 
 > `expo-av` foi descontinuado no SDK 53. `expo-audio` usa hooks (`useAudioPlayer`, `useAudioPlayerStatus`) e libera recursos automaticamente no `unmount`. `seekTo` agora é em **segundos** (antes ms).
 
@@ -89,7 +105,7 @@ pnpm install
 npm install
 ```
 
-> O repo contém `pnpm-lock.yaml` e `package-lock.json`. Escolha um gerenciador e remova o outro para silenciar `expo-doctor`.
+> Padronizado em `npm` com `package-lock.json` único (`overrides` para `metro@0.82.5` e `react-native@0.79.6`).
 
 ### Rodando
 
@@ -147,7 +163,7 @@ Store `src/store/playerStore.ts:1` controla fila; na Fase 2 o `player` será cri
 ```bash
 npx tsc --noEmit                 # typecheck
 npx expo config --type public    # config resolvida
-npx expo-doctor                  # 15/18 na Fase 0 (avisos de lockfile + drift de patch são esperados)
+npx expo-doctor                  # 18/18 ✅ (após chore 8dee632 com overrides metro)
 ```
 
 ---
